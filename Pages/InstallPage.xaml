@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Provisio.Pages.InstallPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:Provisio.Models"
+    xmlns:svc="using:Provisio.Services">
+
+    <Grid Padding="36,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="140" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Spacing="4" Margin="0,0,0,12">
+            <TextBlock Text="Installing" svc:L.Key="install.title" Style="{ThemeResource TitleLargeTextBlockStyle}" />
+            <TextBlock x:Name="StatusLine" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ProgressBar x:Name="OverallProgress" Grid.Column="0" Minimum="0" Maximum="100" VerticalAlignment="Center" Margin="0,0,16,0" />
+            <TextBlock x:Name="ProgressText" Grid.Column="1" VerticalAlignment="Center" />
+        </Grid>
+
+        <InfoBar
+            x:Name="AdminBar"
+            Grid.Row="2"
+            Margin="0,0,0,12"
+            Severity="Warning"
+            IsOpen="False"
+            Visibility="Collapsed"
+            svc:L.MessageKey="install.admin"
+            Message="Some actions need administrator rights. Restart Provisio as administrator to run them.">
+            <InfoBar.ActionButton>
+                <Button Content="Restart as administrator" svc:L.Key="install.restartadmin" Click="Elevate_Click" />
+            </InfoBar.ActionButton>
+        </InfoBar>
+
+        <ListView x:Name="ItemsList" Grid.Row="3">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:InstallItem">
+                    <Grid Padding="0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="140" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{x:Bind Name}" Style="{ThemeResource BodyStrongTextBlockStyle}" />
+                            <TextBlock Text="{x:Bind KitName}" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="{x:Bind Detail, Mode=OneWay}" FontSize="11" Margin="12,0" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock Grid.Column="2" Text="{x:Bind StatusText, Mode=OneWay}" VerticalAlignment="Center" HorizontalTextAlignment="Right" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Border
+            Grid.Row="4"
+            Margin="0,12,0,0"
+            Padding="12"
+            CornerRadius="8"
+            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1">
+            <ScrollViewer x:Name="LogScroll">
+                <TextBlock x:Name="LogText" FontFamily="Consolas" FontSize="11" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+            </ScrollViewer>
+        </Border>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12" Margin="0,16,0,0">
+            <ToggleSwitch x:Name="RestorePointToggle" Header="" svc:L.OnKey="install.restore.on" svc:L.OffKey="install.restore.off" OnContent="Restore point: on" OffContent="Restore point: off" IsOn="True" VerticalAlignment="Center" />
+            <Button Content="Export log" svc:L.Key="install.exportlog" Click="ExportLog_Click" VerticalAlignment="Center" />
+            <Button x:Name="RetryButton" Content="Retry failed" svc:L.Key="common.retry" Click="Retry_Click" Visibility="Collapsed" VerticalAlignment="Center" />
+            <Button x:Name="StartButton" Content="Start installation" svc:L.Key="install.start" Style="{ThemeResource AccentButtonStyle}" Click="Start_Click" VerticalAlignment="Center" />
+            <Button x:Name="DoneButton" Content="Done" svc:L.Key="common.done" Style="{ThemeResource AccentButtonStyle}" Click="Done_Click" Visibility="Collapsed" VerticalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Page>

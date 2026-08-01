@@ -1,0 +1,38 @@
+{
+  "id": "creative",
+  "name": "Creative / Media",
+  "icon": "",
+  "description": "Image, video, audio, and 3D creation tools.",
+  "pages": [
+    {
+      "id": "image",
+      "question": "Image editing?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "gimp", "name": "GIMP", "description": "Raster image editor", "action": { "type": "winget", "target": "GIMP.GIMP" } },
+        { "id": "krita", "name": "Krita", "description": "Digital painting", "action": { "type": "winget", "target": "KDE.Krita" } },
+        { "id": "inkscape", "name": "Inkscape", "description": "Vector graphics", "action": { "type": "winget", "target": "Inkscape.Inkscape" } }
+      ]
+    },
+    {
+      "id": "av",
+      "question": "Video & audio?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "davinci", "name": "DaVinci Resolve", "description": "Pro video editing (free)", "action": { "type": "winget", "target": "BlackmagicDesign.DaVinciResolve" } },
+        { "id": "kdenlive", "name": "Kdenlive", "description": "Open-source video editor", "action": { "type": "winget", "target": "KDE.Kdenlive" } },
+        { "id": "audacity", "name": "Audacity", "description": "Audio editing", "action": { "type": "winget", "target": "Audacity.Audacity" } },
+        { "id": "handbrake", "name": "HandBrake", "description": "Video transcoding", "action": { "type": "winget", "target": "HandBrake.HandBrake" } },
+        { "id": "obs", "name": "OBS Studio", "description": "Recording and streaming", "action": { "type": "winget", "target": "OBSProject.OBSStudio" } }
+      ]
+    },
+    {
+      "id": "3d",
+      "question": "3D?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "blender", "name": "Blender", "description": "3D modeling, animation, rendering", "action": { "type": "winget", "target": "BlenderFoundation.Blender" } }
+      ]
+    }
+  ]
+}

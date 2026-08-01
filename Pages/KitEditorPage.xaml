@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Provisio.Pages.KitEditorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svc="using:Provisio.Services">
+
+    <Grid Padding="36,24" ColumnSpacing="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left: kit list + kit-level actions -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Kit Editor" svc:L.Key="editor.title" Style="{ThemeResource TitleLargeTextBlockStyle}" Margin="0,0,0,16" />
+            <ListView x:Name="KitsList" Grid.Row="1" SelectionChanged="KitsList_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="10" Padding="0,4">
+                            <FontIcon Glyph="{Binding Icon}" FontSize="18" />
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Grid.Row="2" Spacing="8" Margin="0,16,0,0">
+                <Button Content="New kit" svc:L.Key="editor.newkit" Click="NewKit_Click" HorizontalAlignment="Stretch" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Content="Import" svc:L.Key="common.import" Click="Import_Click" />
+                    <Button Content="Export" svc:L.Key="common.export" Click="Export_Click" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Content="Duplicate" svc:L.Key="common.duplicate" Click="Duplicate_Click" />
+                    <Button Content="Delete" svc:L.Key="common.delete" Click="Delete_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- Right: editor for the selected kit -->
+        <ScrollViewer Grid.Column="1">
+            <StackPanel x:Name="EditorPanel" Spacing="16" Visibility="Collapsed" MaxWidth="720">
+
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Kit" svc:L.Key="editor.kit" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                    <TextBox x:Name="KitNameBox" Header="Name" svc:L.HeaderKey="editor.name" />
+                    <TextBox x:Name="KitIconBox" Header="Icon" svc:L.HeaderKey="editor.icon" MaxLength="2" />
+                    <TextBox x:Name="KitDescBox" Header="Description" svc:L.HeaderKey="editor.description" TextWrapping="Wrap" AcceptsReturn="True" Height="60" />
+                </StackPanel>
+
+                <StackPanel Spacing="6">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="Pages" svc:L.Key="editor.pages" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" />
+                        <Button Content="Add page" svc:L.Key="editor.addpage" Click="AddPage_Click" Padding="10,4" />
+                        <Button Content="Remove page" svc:L.Key="editor.removepage" Click="RemovePage_Click" Padding="10,4" />
+                    </StackPanel>
+                    <ListView x:Name="PagesList" SelectionChanged="PagesList_SelectionChanged" MaxHeight="180">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Question}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+
+                <StackPanel x:Name="PagePanel" Spacing="6" Visibility="Collapsed">
+                    <TextBlock Text="Selected page" svc:L.Key="editor.selectedpage" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                    <TextBox x:Name="PageIdBox" Header="Page id" svc:L.HeaderKey="editor.pageid" />
+                    <TextBox x:Name="PageQuestionBox" Header="Question" svc:L.HeaderKey="editor.question" />
+                    <CheckBox x:Name="PageMultiBox" Content="Allow multiple selections" svc:L.Key="editor.multiselect" />
+                    <TextBox x:Name="PageCondPageBox" Header="Condition page" svc:L.HeaderKey="editor.condpage" />
+                    <TextBox x:Name="PageCondChoiceBox" Header="Condition choice" svc:L.HeaderKey="editor.condchoice" />
+
+                    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+                        <TextBlock Text="Choices" svc:L.Key="editor.choices" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" />
+                        <Button Content="Add choice" svc:L.Key="editor.addchoice" Click="AddChoice_Click" Padding="10,4" />
+                        <Button Content="Remove choice" svc:L.Key="editor.removechoice" Click="RemoveChoice_Click" Padding="10,4" />
+                    </StackPanel>
+                    <ListView x:Name="ChoicesListView" SelectionChanged="ChoicesList_SelectionChanged" MaxHeight="160">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <StackPanel x:Name="ChoicePanel" Spacing="6" Visibility="Collapsed">
+                        <TextBlock Text="Selected choice" svc:L.Key="editor.selectedchoice" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <TextBox x:Name="ChoiceIdBox" Header="Choice id" svc:L.HeaderKey="editor.choiceid" />
+                        <TextBox x:Name="ChoiceNameBox" Header="Name" svc:L.HeaderKey="editor.name" />
+                        <TextBox x:Name="ChoiceDescBox" Header="Description" svc:L.HeaderKey="editor.description" />
+
+                        <ComboBox
+                            x:Name="ChoiceTypeBox"
+                            Header="Install action"
+                            svc:L.HeaderKey="editor.action"
+                            HorizontalAlignment="Stretch"
+                            SelectionChanged="ChoiceTypeBox_SelectionChanged" />
+
+                        <!-- Format / usage helper text, updated for the selected action type.
+                             This is where the supported download formats are spelled out. -->
+                        <InfoBar
+                            x:Name="ActionHint"
+                            IsOpen="True"
+                            IsClosable="False"
+                            Severity="Informational" />
+
+                        <!-- Target/Arguments headers are set from code: they change with the action type. -->
+                        <TextBox x:Name="ChoiceTargetBox" Header="Target" TextWrapping="Wrap" AcceptsReturn="True" />
+                        <TextBox x:Name="ChoiceSourceBox" Header="winget source" svc:L.HeaderKey="editor.source" Visibility="Collapsed" />
+                        <TextBox x:Name="ChoiceArgsBox" Header="Arguments" />
+                        <TextBox x:Name="ChoiceDependsBox" Header="Depends on" svc:L.HeaderKey="editor.dependson" />
+                        <CheckBox x:Name="ChoiceAdminBox" Content="Requires administrator" svc:L.Key="editor.admin" />
+                    </StackPanel>
+                </StackPanel>
+
+                <Button
+                    Content="Save kit"
+                    svc:L.Key="editor.save"
+                    Style="{ThemeResource AccentButtonStyle}"
+                    HorizontalAlignment="Left"
+                    Click="Save_Click" />
+                <TextBlock x:Name="SavedText" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

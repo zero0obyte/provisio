@@ -1,0 +1,21 @@
+{
+  "id": "browsers",
+  "name": "Browsers",
+  "icon": "",
+  "description": "Web browsers — pick one or several.",
+  "pages": [
+    {
+      "id": "browsers",
+      "question": "Which browser(s) do you want?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "chrome", "name": "Google Chrome", "description": "", "action": { "type": "winget", "target": "Google.Chrome" } },
+        { "id": "firefox", "name": "Mozilla Firefox", "description": "", "action": { "type": "winget", "target": "Mozilla.Firefox" } },
+        { "id": "brave", "name": "Brave", "description": "Privacy-focused Chromium", "action": { "type": "winget", "target": "Brave.Brave" } },
+        { "id": "edge", "name": "Microsoft Edge", "description": "", "action": { "type": "winget", "target": "Microsoft.Edge" } },
+        { "id": "librewolf", "name": "LibreWolf", "description": "Hardened Firefox fork", "action": { "type": "winget", "target": "LibreWolf.LibreWolf" } },
+        { "id": "tor", "name": "Tor Browser", "description": "Anonymous browsing", "action": { "type": "winget", "target": "TorProject.TorBrowser" } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Provisio.Pages.SummaryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svc="using:Provisio.Services">
+
+    <Grid Padding="36,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Spacing="4" Margin="0,0,0,16">
+            <TextBlock Text="Review your setup" svc:L.Key="summary.title" Style="{ThemeResource TitleLargeTextBlockStyle}" />
+            <TextBlock
+                svc:L.Key="summary.subtitle"
+                TextWrapping="Wrap"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="GroupsHost" Spacing="16" />
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12" Margin="0,20,0,0">
+            <Button Content="Back" svc:L.Key="common.back" Click="Back_Click" />
+            <Button Content="Save as profile" svc:L.Key="summary.saveprofile" Click="SaveProfile_Click" />
+            <Button Content="Preview commands" svc:L.Key="summary.preview" Click="Preview_Click" />
+            <Button x:Name="InstallButton" Content="Install" svc:L.Key="summary.install" Style="{ThemeResource AccentButtonStyle}" Click="Install_Click" />
+        </StackPanel>
+    </Grid>
+</Page>

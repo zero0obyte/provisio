@@ -1,0 +1,25 @@
+# Build output
+bin/
+obj/
+
+# Published binaries belong in GitHub Releases, not in the repo
+*.exe
+*.msix
+*.msixbundle
+*.pdb
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# NuGet
+*.nupkg
+packages/
+
+# OS noise
+Thumbs.db
+desktop.ini
+.DS_Store

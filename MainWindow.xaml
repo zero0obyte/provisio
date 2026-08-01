@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Provisio.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svc="using:Provisio.Services">
+
+    <Grid>
+        <NavigationView
+            x:Name="NavView"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Left"
+            OpenPaneLength="220"
+            SelectionChanged="NavView_SelectionChanged">
+
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Kits" Icon="Home" Tag="kits" svc:L.Key="nav.kits" />
+                <NavigationViewItem Content="Recommended" Icon="Like" Tag="recommend" svc:L.Key="nav.recommend" />
+                <NavigationViewItem Content="Search" Icon="Find" Tag="search" svc:L.Key="nav.search" />
+                <NavigationViewItem Content="Profiles" Icon="Save" Tag="profiles" svc:L.Key="nav.profiles" />
+                <NavigationViewItem Content="Kit Editor" Icon="Edit" Tag="editor" svc:L.Key="nav.editor" />
+            </NavigationView.MenuItems>
+
+            <NavigationView.PaneFooter>
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="16,8,16,4">
+                    <FontIcon Glyph="&#xE793;" FontSize="14" VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Name="ThemeToggle"
+                        svc:L.HeaderKey="settings.theme.light"
+                        Header="Light"
+                        OffContent=""
+                        OnContent=""
+                        Toggled="ThemeToggle_Toggled" />
+                </StackPanel>
+            </NavigationView.PaneFooter>
+
+            <!-- Footer menu items are real navigation entries: putting them in a plain
+                 StackPanel (as before) meant SelectionChanged never fired for Settings. -->
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Updates" Icon="Sync" Tag="updates" svc:L.Key="nav.updates">
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge x:Name="UpdatesBadge" Visibility="Collapsed" />
+                    </NavigationViewItem.InfoBadge>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Settings" Icon="Setting" Tag="settings" svc:L.Key="nav.settings" />
+            </NavigationView.FooterMenuItems>
+
+            <!-- Banners get their own row so they push the page down instead of covering its title. -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" x:Name="BannerHost" Margin="36,12,36,0" Spacing="8">
+                    <InfoBar
+                        x:Name="UpdateInfoBar"
+                        Severity="Informational"
+                        IsOpen="False"
+                        Message="A newer version of Provisio is available.">
+                        <InfoBar.ActionButton>
+                            <HyperlinkButton Content="Download" svc:L.Key="update.download" Click="UpdateDownload_Click" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+
+                    <InfoBar
+                        x:Name="PackageInfoBar"
+                        Severity="Informational"
+                        IsOpen="False">
+                        <InfoBar.ActionButton>
+                            <HyperlinkButton Content="Show" svc:L.Key="updates.available.show" Click="ShowUpdates_Click" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+                </StackPanel>
+
+                <Frame x:Name="ContentFrame" Grid.Row="1" />
+            </Grid>
+        </NavigationView>
+    </Grid>
+</Window>

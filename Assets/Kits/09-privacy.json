@@ -1,0 +1,30 @@
+{
+  "id": "privacy",
+  "name": "Privacy & Security",
+  "icon": "",
+  "description": "Harden Windows: privacy tools, encryption, firewall, and privacy tweaks.",
+  "pages": [
+    {
+      "id": "tools",
+      "question": "Privacy & security tools?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "shutup10", "name": "O&O ShutUp10++", "description": "One-click privacy settings", "action": { "type": "winget", "target": "OO-Software.ShutUp10" } },
+        { "id": "simplewall", "name": "simplewall", "description": "Lightweight firewall control", "action": { "type": "winget", "target": "Henry++.simplewall", "requiresAdmin": true } },
+        { "id": "veracrypt", "name": "VeraCrypt", "description": "Disk encryption", "action": { "type": "winget", "target": "IDRIX.VeraCrypt", "requiresAdmin": true } },
+        { "id": "protonvpn", "name": "Proton VPN", "description": "VPN client", "action": { "type": "winget", "target": "Proton.ProtonVPN" } },
+        { "id": "bitwarden", "name": "Bitwarden", "description": "Password manager", "action": { "type": "winget", "target": "Bitwarden.Bitwarden" } }
+      ]
+    },
+    {
+      "id": "tweaks",
+      "question": "Privacy tweaks?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "ad-id", "name": "Disable advertising ID", "description": "Stop ad tracking across apps", "action": { "type": "script", "target": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo /v Enabled /t REG_DWORD /d 0 /f" } },
+        { "id": "activity-history", "name": "Disable activity history", "description": "Don't upload the activity timeline", "action": { "type": "script", "target": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v PublishUserActivities /t REG_DWORD /d 0 /f", "requiresAdmin": true } },
+        { "id": "tailored", "name": "Disable tailored experiences", "description": "No diagnostic-data-based tips and ads", "action": { "type": "script", "target": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Privacy /v TailoredExperiencesWithDiagnosticDataEnabled /t REG_DWORD /d 0 /f" } }
+      ]
+    }
+  ]
+}

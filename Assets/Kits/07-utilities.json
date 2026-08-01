@@ -1,0 +1,22 @@
+{
+  "id": "utilities",
+  "name": "Utilities",
+  "icon": "",
+  "description": "Small tools that make Windows better: search, screenshots, hotkeys, monitoring.",
+  "pages": [
+    {
+      "id": "utilities",
+      "question": "Which utilities do you want?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "everything", "name": "Everything", "description": "Instant file search", "action": { "type": "winget", "target": "voidtools.Everything" } },
+        { "id": "powertoys", "name": "Microsoft PowerToys", "description": "Power-user utilities", "action": { "type": "winget", "target": "Microsoft.PowerToys" } },
+        { "id": "sharex", "name": "ShareX", "description": "Screenshots and screen recording", "action": { "type": "winget", "target": "ShareX.ShareX" } },
+        { "id": "ditto", "name": "Ditto", "description": "Clipboard manager", "action": { "type": "winget", "target": "Ditto.Ditto" } },
+        { "id": "autohotkey", "name": "AutoHotkey", "description": "Hotkeys and automation", "action": { "type": "winget", "target": "AutoHotkey.AutoHotkey" } },
+        { "id": "wiztree", "name": "WizTree", "description": "See what's eating disk space", "action": { "type": "winget", "target": "AntibodySoftware.WizTree" } },
+        { "id": "hwinfo", "name": "HWiNFO", "description": "Hardware monitoring", "action": { "type": "winget", "target": "REALiX.HWiNFO" } }
+      ]
+    }
+  ]
+}

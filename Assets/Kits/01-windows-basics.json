@@ -1,0 +1,46 @@
+{
+  "id": "windows-basics",
+  "name": "Windows Basics",
+  "icon": "",
+  "description": "Essential apps plus OS-level tweaks: dark mode, file extensions, bloatware, telemetry, power plan.",
+  "pages": [
+    {
+      "id": "essentials",
+      "question": "Which essential apps do you want?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "7zip", "name": "7-Zip", "description": "File archiver", "action": { "type": "winget", "target": "7zip.7zip" } },
+        { "id": "notepadpp", "name": "Notepad++", "description": "Text editor", "action": { "type": "winget", "target": "Notepad++.Notepad++" } },
+        { "id": "vlc", "name": "VLC media player", "description": "Plays almost everything", "action": { "type": "winget", "target": "VideoLAN.VLC" } },
+        { "id": "powertoys", "name": "Microsoft PowerToys", "description": "Power-user utilities from Microsoft", "action": { "type": "winget", "target": "Microsoft.PowerToys" } },
+        { "id": "terminal", "name": "Windows Terminal", "description": "Modern terminal app", "action": { "type": "winget", "target": "Microsoft.WindowsTerminal" } },
+        { "id": "everything", "name": "Everything", "description": "Instant file search", "action": { "type": "winget", "target": "voidtools.Everything" } }
+      ]
+    },
+    {
+      "id": "tweaks",
+      "question": "Which system tweaks should be applied?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "darkmode", "name": "Dark mode", "description": "Apps and system in dark mode", "action": { "type": "script", "target": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize /v AppsUseLightTheme /t REG_DWORD /d 0 /f; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize /v SystemUsesLightTheme /t REG_DWORD /d 0 /f", "requiresAdmin": false } },
+        { "id": "fileext", "name": "Show file extensions", "description": "Always show extensions in Explorer", "action": { "type": "script", "target": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v HideFileExt /t REG_DWORD /d 0 /f" } },
+        { "id": "hiddenfiles", "name": "Show hidden files", "description": "Show hidden files in Explorer", "action": { "type": "script", "target": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v Hidden /t REG_DWORD /d 1 /f" } },
+        { "id": "taskbar-left", "name": "Taskbar icons to the left", "description": "Classic left-aligned taskbar", "action": { "type": "script", "target": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v TaskbarAl /t REG_DWORD /d 0 /f" } },
+        { "id": "disable-telemetry", "name": "Disable telemetry", "description": "Reduce diagnostic data sent to Microsoft", "action": { "type": "script", "target": "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection /v AllowTelemetry /t REG_DWORD /d 0 /f", "requiresAdmin": true } },
+        { "id": "disable-suggestions", "name": "Disable suggestions & ads", "description": "Turn off Start/lock screen suggestions", "action": { "type": "script", "target": "reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SubscribedContent-338389Enabled /t REG_DWORD /d 0 /f; reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager /v SystemPaneSuggestionsEnabled /t REG_DWORD /d 0 /f" } },
+        { "id": "ultimate-power", "name": "Ultimate Performance power plan", "description": "Enable and activate the hidden power plan (desktop PCs)", "action": { "type": "script", "target": "powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61; powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61", "requiresAdmin": true } },
+        { "id": "long-paths", "name": "Enable long file paths", "description": "Remove the 260-character path limit", "action": { "type": "script", "target": "reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem /v LongPathsEnabled /t REG_DWORD /d 1 /f", "requiresAdmin": true } }
+      ]
+    },
+    {
+      "id": "debloat",
+      "question": "Remove preinstalled bloatware?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "remove-xbox", "name": "Remove Xbox apps", "description": "Xbox app and Game Bar", "action": { "type": "script", "target": "Get-AppxPackage *xboxapp* | Remove-AppxPackage; Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage", "requiresAdmin": true } },
+        { "id": "remove-cortana", "name": "Remove Cortana", "description": "Uninstall the Cortana app", "action": { "type": "script", "target": "Get-AppxPackage *Microsoft.549981C3F5F10* | Remove-AppxPackage", "requiresAdmin": true } },
+        { "id": "remove-tips", "name": "Remove Tips / Get Started", "description": "Uninstall promotional apps", "action": { "type": "script", "target": "Get-AppxPackage *Getstarted* | Remove-AppxPackage; Get-AppxPackage *MicrosoftTips* | Remove-AppxPackage", "requiresAdmin": true } }
+      ]
+    }
+  ]
+}

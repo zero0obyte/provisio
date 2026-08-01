@@ -1,0 +1,39 @@
+{
+  "id": "work",
+  "name": "Work / Productivity",
+  "icon": "",
+  "description": "Office suites, communication, notes, and PDF tools.",
+  "pages": [
+    {
+      "id": "office",
+      "question": "Which office suite?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "libreoffice", "name": "LibreOffice", "description": "Free office suite", "action": { "type": "winget", "target": "TheDocumentFoundation.LibreOffice" } },
+        { "id": "m365", "name": "Microsoft 365", "description": "Word, Excel, PowerPoint (subscription)", "action": { "type": "winget", "target": "Microsoft.Office" } },
+        { "id": "onlyoffice", "name": "ONLYOFFICE", "description": "MS Office-compatible suite", "action": { "type": "winget", "target": "ONLYOFFICE.DesktopEditors" } }
+      ]
+    },
+    {
+      "id": "communication",
+      "question": "Communication apps?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "teams", "name": "Microsoft Teams", "description": "Meetings and chat", "action": { "type": "winget", "target": "Microsoft.Teams" } },
+        { "id": "slack", "name": "Slack", "description": "Team messaging", "action": { "type": "winget", "target": "SlackTechnologies.Slack" } },
+        { "id": "zoom", "name": "Zoom", "description": "Video calls", "action": { "type": "winget", "target": "Zoom.Zoom" } }
+      ]
+    },
+    {
+      "id": "productivity",
+      "question": "Notes and productivity?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "notion", "name": "Notion", "description": "Docs and wikis", "action": { "type": "winget", "target": "Notion.Notion" } },
+        { "id": "obsidian", "name": "Obsidian", "description": "Local Markdown notes", "action": { "type": "winget", "target": "Obsidian.Obsidian" } },
+        { "id": "todoist", "name": "Todoist", "description": "Task manager", "action": { "type": "winget", "target": "Doist.Todoist" } },
+        { "id": "acrobat", "name": "Adobe Acrobat Reader", "description": "PDF reader", "action": { "type": "winget", "target": "Adobe.Acrobat.Reader.64-bit" } }
+      ]
+    }
+  ]
+}

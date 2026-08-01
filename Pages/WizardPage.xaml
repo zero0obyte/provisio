@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Provisio.Pages.WizardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svc="using:Provisio.Services">
+
+    <Grid Padding="36,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Spacing="2" Margin="0,0,0,8">
+            <TextBlock x:Name="KitHeader" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+            <TextBlock x:Name="QuestionText" Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12" Margin="0,0,0,12">
+            <TextBlock x:Name="StepText" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            <ProgressBar x:Name="StepProgress" Width="200" VerticalAlignment="Center" Minimum="0" Maximum="100" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl x:Name="ChoicesList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Padding="16"
+                            Margin="0,0,0,8"
+                            CornerRadius="8"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1">
+                            <ContentPresenter x:Name="Host" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Grid Grid.Row="3" Margin="0,20,0,0">
+            <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Left">
+                <Button Content="Back" svc:L.Key="common.back" Click="Back_Click" />
+                <Button Content="Skip this step" svc:L.Key="common.skip" Click="Skip_Click" />
+            </StackPanel>
+            <Button
+                x:Name="NextButton"
+                Content="Next"
+                Style="{ThemeResource AccentButtonStyle}"
+                HorizontalAlignment="Right"
+                Click="Next_Click" />
+        </Grid>
+    </Grid>
+</Page>

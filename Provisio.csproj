@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>Provisio</RootNamespace>
+    <AssemblyName>Provisio</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+    <!-- Unpackaged (single standalone .exe) with self-contained Windows App SDK -->
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <SelfContained>true</SelfContained>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.1.0</Version>
+    <Description>Provisio - first-run Windows setup wizard</Description>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <!-- Localized strings live in the .cs sources; read them as UTF-8 regardless of the system codepage. -->
+    <CodePage>65001</CodePage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Kits\*.json" />
+    <!-- Embedded so the single-file build really is standalone; also copied next to the
+         exe so the shipped kits stay editable in a normal (folder) deployment. -->
+    <EmbeddedResource Include="Assets\Kits\*.json" />
+    <Content Include="Assets\Kits\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

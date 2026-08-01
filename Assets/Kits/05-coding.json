@@ -1,0 +1,43 @@
+{
+  "id": "coding",
+  "name": "Coding / Dev",
+  "icon": "",
+  "description": "Editors, toolchains, terminals, and dev utilities.",
+  "pages": [
+    {
+      "id": "editors",
+      "question": "Which editor(s) / IDE(s)?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "vscode", "name": "Visual Studio Code", "description": "Lightweight code editor", "action": { "type": "winget", "target": "Microsoft.VisualStudioCode" } },
+        { "id": "vs2022", "name": "Visual Studio 2022 Community", "description": "Full IDE", "action": { "type": "winget", "target": "Microsoft.VisualStudio.2022.Community" } },
+        { "id": "jetbrains", "name": "JetBrains Toolbox", "description": "Installs IntelliJ, Rider, PyCharm & co.", "action": { "type": "winget", "target": "JetBrains.Toolbox" } },
+        { "id": "notepadpp", "name": "Notepad++", "description": "Quick text editing", "action": { "type": "winget", "target": "Notepad++.Notepad++" } },
+        { "id": "neovim", "name": "Neovim", "description": "Terminal editor", "action": { "type": "winget", "target": "Neovim.Neovim" } }
+      ]
+    },
+    {
+      "id": "toolchains",
+      "question": "Which languages / toolchains?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "git", "name": "Git", "description": "Version control", "action": { "type": "winget", "target": "Git.Git" } },
+        { "id": "python", "name": "Python 3", "description": "Python interpreter", "action": { "type": "winget", "target": "Python.Python.3.12" } },
+        { "id": "nodejs", "name": "Node.js LTS", "description": "JavaScript runtime", "action": { "type": "winget", "target": "OpenJS.NodeJS.LTS" } },
+        { "id": "dotnet-sdk", "name": ".NET 8 SDK", "description": "C# / .NET development", "action": { "type": "winget", "target": "Microsoft.DotNet.SDK.8" } },
+        { "id": "docker", "name": "Docker Desktop", "description": "Containers", "action": { "type": "winget", "target": "Docker.DockerDesktop", "requiresAdmin": true } }
+      ]
+    },
+    {
+      "id": "terminal",
+      "question": "Terminal setup?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "terminal", "name": "Windows Terminal", "description": "Modern terminal app", "action": { "type": "winget", "target": "Microsoft.WindowsTerminal" } },
+        { "id": "pwsh", "name": "PowerShell 7", "description": "Modern PowerShell", "action": { "type": "winget", "target": "Microsoft.PowerShell" } },
+        { "id": "gh", "name": "GitHub CLI", "description": "gh command line", "action": { "type": "winget", "target": "GitHub.cli" } },
+        { "id": "ohmyposh", "name": "Oh My Posh", "description": "Prompt theming", "action": { "type": "winget", "target": "JanDeDobbeleer.OhMyPosh" } }
+      ]
+    }
+  ]
+}

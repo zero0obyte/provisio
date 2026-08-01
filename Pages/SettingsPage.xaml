@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Provisio.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:svc="using:Provisio.Services">
+
+    <Page.Resources>
+        <!-- One card per settings group. New groups are just another Border with this style,
+             so the page grows without re-flowing the existing layout. -->
+        <Style x:Key="SettingsCard" TargetType="Border">
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style x:Key="SectionCaption" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer>
+        <Grid Padding="36,24">
+            <StackPanel Spacing="16" MaxWidth="720">
+                <TextBlock Text="Settings" svc:L.Key="settings.title" Style="{ThemeResource TitleLargeTextBlockStyle}" Margin="0,0,0,4" />
+
+                <!-- Appearance -->
+                <Border Style="{StaticResource SettingsCard}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Appearance" svc:L.Key="settings.appearance" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <TextBlock svc:L.Key="settings.appearance.desc" Style="{StaticResource SectionCaption}" />
+                        <ComboBox
+                            x:Name="ThemeBox"
+                            Header="Theme"
+                            svc:L.HeaderKey="settings.theme"
+                            MinWidth="280"
+                            SelectionChanged="ThemeBox_SelectionChanged" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Language -->
+                <Border Style="{StaticResource SettingsCard}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Language" svc:L.Key="settings.language" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <TextBlock svc:L.Key="settings.language.desc" Style="{StaticResource SectionCaption}" />
+                        <ComboBox
+                            x:Name="LanguageBox"
+                            Header="Interface language"
+                            svc:L.HeaderKey="settings.language.label"
+                            MinWidth="280"
+                            DisplayMemberPath="DisplayName"
+                            SelectionChanged="LanguageBox_SelectionChanged" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Package updates -->
+                <Border Style="{StaticResource SettingsCard}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Package updates" svc:L.Key="settings.packages" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <TextBlock svc:L.Key="settings.packages.desc" Style="{StaticResource SectionCaption}" />
+                        <ToggleSwitch x:Name="PackageCheckToggle" svc:L.HeaderKey="settings.packages.check" Toggled="PackageCheckToggle_Toggled" />
+                        <ToggleSwitch x:Name="PackageAutoToggle" svc:L.HeaderKey="settings.packages.auto" Toggled="PackageAutoToggle_Toggled" />
+                        <Button Content="Open the Updates page" svc:L.Key="settings.packages.open" Click="OpenUpdates_Click" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Provisio updates -->
+                <Border Style="{StaticResource SettingsCard}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Provisio updates" svc:L.Key="settings.appupdates" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <TextBlock svc:L.Key="settings.appupdates.desc" Style="{StaticResource SectionCaption}" />
+                        <TextBox x:Name="UpdateUrlBox" PlaceholderText="https://example.com/provisio-update.json" />
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <Button Content="Check now" svc:L.Key="settings.checknow" Click="CheckNow_Click" />
+                            <TextBlock x:Name="VersionText" FontSize="12" VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Offline / portable -->
+                <Border Style="{StaticResource SettingsCard}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Offline / portable mode" svc:L.Key="settings.offline" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <ToggleSwitch x:Name="CacheToggle" svc:L.HeaderKey="settings.cache" Toggled="CacheToggle_Toggled" />
+                        <TextBlock x:Name="CachePathText" Style="{StaticResource SectionCaption}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Data & first run -->
+                <Border Style="{StaticResource SettingsCard}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Data" svc:L.Key="settings.data" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <TextBlock svc:L.Key="settings.data.desc" Style="{StaticResource SectionCaption}" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="Open data folder" svc:L.Key="settings.data.open" Click="OpenDataFolder_Click" />
+                            <Button Content="Clear installer cache" svc:L.Key="settings.data.clearcache" Click="ClearCache_Click" />
+                            <Button Content="Show first-run pop-ups again" svc:L.Key="settings.data.resetpopups" Click="ResetPopups_Click" />
+                        </StackPanel>
+                        <TextBlock x:Name="DataStatusText" Style="{StaticResource SectionCaption}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- About -->
+                <Border Style="{StaticResource SettingsCard}">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="About" svc:L.Key="settings.about" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                        <TextBlock svc:L.Key="settings.about.body" Style="{StaticResource SectionCaption}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

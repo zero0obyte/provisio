@@ -1,0 +1,41 @@
+{
+  "id": "gaming",
+  "name": "Gaming",
+  "icon": "",
+  "description": "Game stores, voice chat, recording, and the runtimes games need.",
+  "pages": [
+    {
+      "id": "runtimes",
+      "question": "Install gaming runtimes? (recommended)",
+      "multiSelect": true,
+      "choices": [
+        { "id": "directx", "name": "DirectX", "description": "Legacy DirectX runtime", "action": { "type": "winget", "target": "Microsoft.DirectX" } },
+        { "id": "vcredist", "name": "Visual C++ Redistributable", "description": "Required by most games", "action": { "type": "winget", "target": "Microsoft.VCRedist.2015+.x64" } },
+        { "id": "dotnet", "name": ".NET Desktop Runtime", "description": "Required by many launchers and tools", "action": { "type": "winget", "target": "Microsoft.DotNet.DesktopRuntime.8" } }
+      ]
+    },
+    {
+      "id": "stores",
+      "question": "Which game stores / launchers?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "steam", "name": "Steam", "description": "Valve's store", "action": { "type": "winget", "target": "Valve.Steam" } },
+        { "id": "epic", "name": "Epic Games Launcher", "description": "Epic's store", "action": { "type": "winget", "target": "EpicGames.EpicGamesLauncher" } },
+        { "id": "gog", "name": "GOG Galaxy", "description": "DRM-free store client", "action": { "type": "winget", "target": "GOG.Galaxy" } },
+        { "id": "xbox", "name": "Xbox app", "description": "PC Game Pass", "action": { "type": "winget", "target": "Microsoft.GamingApp" } },
+        { "id": "battlenet", "name": "Battle.net", "description": "Blizzard launcher", "action": { "type": "winget", "target": "Blizzard.BattleNet" } },
+        { "id": "ea", "name": "EA app", "description": "Electronic Arts launcher", "action": { "type": "winget", "target": "ElectronicArts.EADesktop" } }
+      ]
+    },
+    {
+      "id": "tools",
+      "question": "Gaming tools?",
+      "multiSelect": true,
+      "choices": [
+        { "id": "discord", "name": "Discord", "description": "Voice and text chat", "action": { "type": "winget", "target": "Discord.Discord" } },
+        { "id": "obs", "name": "OBS Studio", "description": "Recording and streaming", "action": { "type": "winget", "target": "OBSProject.OBSStudio" } },
+        { "id": "afterburner", "name": "MSI Afterburner", "description": "GPU tuning and overlay", "action": { "type": "winget", "target": "Guru3D.Afterburner" } }
+      ]
+    }
+  ]
+}
