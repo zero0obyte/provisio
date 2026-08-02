@@ -19,7 +19,7 @@
       "question": "Video & audio?",
       "multiSelect": true,
       "choices": [
-        { "id": "davinci", "name": "DaVinci Resolve", "description": "Pro video editing (free)", "action": { "type": "winget", "target": "BlackmagicDesign.DaVinciResolve" } },
+        { "id": "shotcut", "name": "Shotcut", "description": "Free, open-source video editor", "action": { "type": "winget", "target": "Meltytech.Shotcut" } },
         { "id": "kdenlive", "name": "Kdenlive", "description": "Open-source video editor", "action": { "type": "winget", "target": "KDE.Kdenlive" } },
         { "id": "audacity", "name": "Audacity", "description": "Audio editing", "action": { "type": "winget", "target": "Audacity.Audacity" } },
         { "id": "handbrake", "name": "HandBrake", "description": "Video transcoding", "action": { "type": "winget", "target": "HandBrake.HandBrake" } },

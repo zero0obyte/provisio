@@ -22,7 +22,7 @@
         { "id": "steam", "name": "Steam", "description": "Valve's store", "action": { "type": "winget", "target": "Valve.Steam" } },
         { "id": "epic", "name": "Epic Games Launcher", "description": "Epic's store", "action": { "type": "winget", "target": "EpicGames.EpicGamesLauncher" } },
         { "id": "gog", "name": "GOG Galaxy", "description": "DRM-free store client", "action": { "type": "winget", "target": "GOG.Galaxy" } },
-        { "id": "xbox", "name": "Xbox app", "description": "PC Game Pass", "action": { "type": "winget", "target": "Microsoft.GamingApp" } },
+        { "id": "xbox", "name": "Xbox app", "description": "PC Game Pass", "action": { "type": "winget", "target": "9MV0B5HZVK9Z", "source": "msstore" } },
         { "id": "battlenet", "name": "Battle.net", "description": "Blizzard launcher", "action": { "type": "winget", "target": "Blizzard.BattleNet" } },
         { "id": "ea", "name": "EA app", "description": "Electronic Arts launcher", "action": { "type": "winget", "target": "ElectronicArts.EADesktop" } }
       ]
