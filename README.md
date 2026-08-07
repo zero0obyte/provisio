@@ -138,3 +138,4 @@ Assets\Kits\ the built-in kit definitions
 
 Adding a language is one dictionary in `Services\Loc.cs` plus one entry in `Loc.Languages`; XAML strings are tagged with `svc:L.Key="…"` and re-applied when the language changes.
 
+NOTE: AI was used to some extent as a tool in the development of this program.
